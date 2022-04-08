@@ -1,15 +1,6 @@
-FROM node:14.15.0-alpine3.12
-
-WORKDIR /app
-
-COPY package.json .
-COPY yarn.lock .
-
+FROM node:16.7.0-alpine
+WORKDIR /front
+COPY ./front/package.json ./front/yarn.lock /front/
+RUN apk update && \
+    apk add git
 RUN yarn install
-
-COPY . .
-
-ENV HOST 0.0.0.0
-EXPOSE 3000
-
-CMD [ "yarn", "dev" ]
