@@ -1,15 +1,14 @@
 version: '3'
 
 services:
-  nuxt:
-    build: .
-    platform: linux/x86_64
-    container_name: front
-    restart: always
-    ports:
-      - 3000:3000
-    volumes:
-      - ./front:/front
-      - /datsumo-front/node_modules
-    command: >
-      ash -c "yarn install && yarn dev"
+    nuxt-app:
+      build: .  # Dockerfileの場所
+      # platform: linux/x86_64
+      working_dir: /src  # ホストOSとコンテナ内でソースコードを共有する
+      restart: always
+      volumes:
+        - .:/src
+      ports:
+        - 3000:3000   # コンテナ内部の3000を外部から5000でアクセスする
+      command: >
+       ash -c "yarn install"
