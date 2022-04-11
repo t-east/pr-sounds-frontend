@@ -2,10 +2,12 @@ version: '3'
 services:
     nuxt-app:
       build: .  # Dockerfileの場所
-      platform: linux/x86_64
+      # platform: linux/x86_64
       working_dir: /src  # ホストOSとコンテナ内でソースコードを共有する
+      restart: always
       volumes:
         - .:/src
       ports:
         - 3000:3000   # コンテナ内部の3000を外部から5000でアクセスする
-      tty: true   # コンテナ起動後、StatusがExitにならないようttyの設定
+      command: >
+       ash -c "yarn install"

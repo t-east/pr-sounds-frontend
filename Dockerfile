@@ -1,15 +1,10 @@
-FROM node:14.15.0-alpine3.12
+FROM node:16.7.0-alpine
 
 WORKDIR /app
 
 COPY package.json .
 COPY yarn.lock .
-
-RUN yarn install
-
-COPY . .
-
-ENV HOST 0.0.0.0
-EXPOSE 3000
-
-CMD [ "yarn", "dev" ]
+RUN apk update && \
+    apk add git
+RUN yarn add nuxt && \
+yarn install

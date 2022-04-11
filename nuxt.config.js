@@ -6,6 +6,9 @@ export default {
     baseURL: 'http://locahost:3000',
     apiURL: 'http://localhost:8080/',
   },
+  server: {
+    host: '0.0.0.0'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
