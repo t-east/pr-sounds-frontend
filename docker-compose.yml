@@ -1,14 +1,16 @@
 version: '3'
 
 services:
-    nuxt-app:
-      build: .  # Dockerfileの場所
-      # platform: linux/x86_64
-      working_dir: /src  # ホストOSとコンテナ内でソースコードを共有する
-      restart: always
-      volumes:
-        - .:/src
-      ports:
-        - 3000:3000   # コンテナ内部の3000を外部から5000でアクセスする
-      command: >
-       ash -c "yarn install"
+  nuxt:
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./front:/front
+      - /front/node_modules
+    command: >
+      ash -c "yarn install && yarn dev"
